@@ -1,58 +1,87 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View
+  YellowBox,
+  NetInfo
 } from 'react-native';
+import { Root } from 'native-base';
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers,
+} from 'redux';
+import {
+  createNavigationPropConstructor,
+  createNavigationReducer,
+  createReactNavigationReduxMiddleware,
+  initializeListeners,
+} from 'react-navigation-redux-helpers';
+import thunk from 'redux-thunk';
+import { Provider, connect } from 'react-redux';
+import { connectionStatus } from './actions/network';
+import AppNavigator from './containers';
+import { dataReducer } from './reducers';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+
+const navReducer = createNavigationReducer(AppNavigator);
+const appReducer = combineReducers({
+  nav: navReducer,
+  data: dataReducer
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+const middleware = createReactNavigationReduxMiddleware(
+  "root",
+  state => state.nav,
+);
+const navigationPropConstructor = createNavigationPropConstructor("root");
+
+class AppWithNavigation extends Component {
+  componentDidMount() {
+    NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectionChange);
+    initializeListeners("root", this.props.nav);
+  }
+
+  componentWillUnmount() {
+    NetInfo.isConnected.removeEventListener('connectionChange', this.handleConnectionChange);
+  }
+
+  handleConnectionChange = (isConnected) => {
+    const { dispatch } = this.props;
+    dispatch(connectionStatus({ status: isConnected }));
+  };
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
-      </View>
+    const {
+      dispatch,
+      nav
+    } = this.props;
+    const navigation = navigationPropConstructor(
+      dispatch,
+      nav
     );
+    return (<Root>
+      <AppNavigator navigation={navigation} />
+    </Root>);
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+const mapStateToProps = (state) => ({
+  nav: state.nav,
 });
+
+const AppWithNavigationState = connect(mapStateToProps)(AppWithNavigation);
+
+const store = createStore(
+  appReducer,
+  applyMiddleware(middleware, thunk),
+);
+
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
+    );
+  }
+}
