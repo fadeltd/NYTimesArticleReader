@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Get Params should return null 1`] = `"?"`;
+
+exports[`Get Params should return the string of https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=3304a9018a9a4cd8a6c587cd2060e092&page=0&sort=newest&q=Brazil& 1`] = `"https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=3304a9018a9a4cd8a6c587cd2060e092&page=0&sort=newest&q=Brazil&"`;
+
+exports[`Get Params should return the string of https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=3304a9018a9a4cd8a6c587cd2060e092&page=0&sort=oldest& 1`] = `"https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=3304a9018a9a4cd8a6c587cd2060e092&page=0&sort=oldest&"`;
+
+exports[`To Title Case should return null 1`] = `""`;
+
+exports[`To Title Case should return the string of By Reuters) 1`] = `"By Reuters"`;
+
+exports[`To Title Case should return the string of By The Associated Press) 1`] = `"By The Associated Press"`;

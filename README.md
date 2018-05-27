@@ -36,7 +36,7 @@ detail article
 
 ## Testing
 
-The project currently contains test for the actions and reducers within `/js/__tests__/`. Mocks are located within `js/__mocks__/` In order to execute these tests, run `$ npm test`.
+The project currently contains test for the actions and reducers within `__tests__/`. Mocks are located within `__mocks__/` In order to execute these tests, run `$ npm test`.
 
 #### Try this Application
 - Clone this [Repo](https://github.com/fadeltd/NYTimesArticleReader)

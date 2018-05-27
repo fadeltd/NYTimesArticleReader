@@ -4,18 +4,23 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle-ios": "react-native bundle --platform ios --entry-file index.js --bundle-output ./main.jsbundle --assets-dest ./release --dev false",
+    "bundle-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/",
     "test": "jest"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "chai": "^4.1.2",
     "moment": "^2.22.1",
     "native-base": "^2.4.5",
+    "nock": "^9.2.6",
     "react": "16.3.1",
     "react-native": "0.55.4",
     "react-navigation": "^2.0.4",
     "react-navigation-redux-helpers": "^1.1.1",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
+    "redux-mock-store": "^1.5.1",
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
@@ -27,7 +32,7 @@
   "jest": {
     "preset": "react-native",
     "transformIgnorePatterns": [
-      "node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers)"
+      "node_modules/(?!(jest-)?react-native|react-navigation|react-navigation-redux-helpers|native-base)"
     ]
   }
 }

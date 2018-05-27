@@ -35,8 +35,8 @@ export const fetchingFailed = (data) => {
 // API Request with axios with method 'GET'
 export const apiGet = (type, url, callback) => {
   return (dispatch, getState) => {
-    const { isConnected } = getState().data;
-    if (isConnected) {
+    // const { isConnected } = getState().data;
+    // if (isConnected) {
       dispatch(fetching({ type }));
       axios.get(url, { timeout: 30000 })
         .then(response => {
@@ -52,13 +52,13 @@ export const apiGet = (type, url, callback) => {
             });
           }
         });
-    } else {
-      const errorOffline = 'No network available';
-      if (callback) {
-        callback({
-          error: errorOffline
-        });
-      }
-    }
+    // } else {
+    //   const errorOffline = 'No network available';
+    //   if (callback) {
+    //     callback({
+    //       error: errorOffline
+    //     });
+    //   }
+    // }
   }
 }
