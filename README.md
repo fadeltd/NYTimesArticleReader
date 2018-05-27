@@ -14,15 +14,15 @@ detail article
 ## Preview
 * Android
 
-![Screenshot](/.github/screenshot/screenshot-android-1.png?raw=true)
-![Screenshot](/.github/screenshot/screenshot-android-2.png?raw=true)
-![Screenshot](/.github/screenshot/screenshot-android-3.png?raw=true)
+![Screenshot](./screenshots/screenshot-android-1.png?raw=true)
+![Screenshot](./screenshots/screenshot-android-2.png?raw=true)
+![Screenshot](./screenshots/screenshot-android-3.png?raw=true)
 
 * iOS
 
-![Screenshot](/.github/screenshot/screenshot-ios-1.png?raw=true)
-![Screenshot](/.github/screenshot/screenshot-ios-2.png?raw=true)
-![Screenshot](/.github/screenshot/screenshot-ios-3.png?raw=true)
+![Screenshot](./screenshots/screenshot-ios-1.png?raw=true)
+![Screenshot](./screenshots/screenshot-ios-2.png?raw=true)
+![Screenshot](./screenshots/screenshot-ios-3.png?raw=true)
 
 ### Build
 ### iOS
@@ -41,13 +41,15 @@ The project currently contains test for the actions and reducers within `__tests
 #### Try this Application
 - Clone this [Repo](https://github.com/fadeltd/NYTimesArticleReader)
 ```
-git clone https://github.com/fadeltd/NYTimesArticleReader
+git clone https://github.com/fadeltd/NYTimesArticleReader.git
 cd NYTimesArticleReader
 npm install
 react-native link
 react-native run-android / react-native run-ios
 npm test
 ```
+- [Android APK](./release/app-debug.apk) 
+- [iOS IPA](./release/NYTimesArticleReader.ipa) 
 
 #### Generate Releases APK
 - Run command
