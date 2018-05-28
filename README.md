@@ -1,5 +1,7 @@
 # NY Times Article Reader
 
+[![Build Status](https://travis-ci.org/fadeltd/NYTimesArticleReader.svg?branch=master)](https://travis-ci.org/fadeltd/NYTimesArticleReader)
+
 This is a mobile application built with react-native to consume API from the [New York Times Developer](https://github.com/ngengs/filkom-news-reader_server) and give you latest news and announcement from [Filkom](http://filkom.ub.ac.id).
 
 
